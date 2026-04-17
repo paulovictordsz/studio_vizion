@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import Image from 'next/image'
+import { motion, AnimatePresence } from 'framer-motion'
 
 const testimonials = [
   {
@@ -23,71 +24,99 @@ const testimonials = [
 
 export default function TestimonialsSlider() {
   const [current, setCurrent] = useState(0)
+  const [dir, setDir] = useState(1)
   const t = testimonials[current]
 
-  const prev = () => setCurrent((c) => (c - 1 + testimonials.length) % testimonials.length)
-  const next = () => setCurrent((c) => (c + 1) % testimonials.length)
+  const go = (next: number) => {
+    setDir(next > current ? 1 : -1)
+    setCurrent(next)
+  }
+  const prev = () => go((current - 1 + testimonials.length) % testimonials.length)
+  const next = () => go((current + 1) % testimonials.length)
 
   return (
     <section id="depoimento" className="testimonials-root" style={{
-      backgroundColor: '#000',
-      display: 'flex',
-      height: '500px',
-      overflow: 'hidden',
+      backgroundColor: '#000', display: 'flex', height: '500px', overflow: 'hidden',
     }}>
       {/* Left card */}
       <div className="testimonials-left" style={{
-        width: '420px',
-        minWidth: '420px',
-        zIndex: 2,
-        backgroundColor: 'rgba(0,0,0,0.75)',
-        backdropFilter: 'blur(8px)',
-        padding: '48px',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '20px',
-        borderRight: '1px solid rgba(255,255,255,0.1)',
+        width: '440px', minWidth: '440px', zIndex: 2,
+        backgroundColor: 'rgba(10,10,10,0.95)',
+        padding: '52px', display: 'flex', flexDirection: 'column', gap: '20px',
+        borderRight: '1px solid rgba(255,255,255,0.07)',
       }}>
-        {/* Logo */}
-        <div style={{ position: 'relative', height: '28px', width: '100px' }}>
-          <Image src={t.logo} alt="Company logo" fill style={{ objectFit: 'contain', objectPosition: 'left', filter: 'brightness(0) invert(1)' }} />
+        <div style={{ position: 'relative', height: '24px', width: '80px' }}>
+          <Image src={t.logo} alt="logo" fill style={{ objectFit: 'contain', objectPosition: 'left', filter: 'brightness(0) invert(1)', opacity: 0.5 }} />
         </div>
 
-        {/* Quote */}
-        <p style={{ fontSize: '15px', fontWeight: 300, lineHeight: 1.65, color: 'white', fontStyle: 'italic', flex: 1 }}>
-          {t.quote}
-        </p>
+        {/* Large quote mark */}
+        <div style={{ fontFamily: 'Georgia, serif', fontSize: '64px', color: '#D6FF91', lineHeight: 1, marginBottom: '-24px', opacity: 0.6 }}>"</div>
 
-        {/* Person */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <div style={{ position: 'relative', width: '36px', height: '36px', borderRadius: '50%', overflow: 'hidden', flexShrink: 0 }}>
-            <Image src={t.avatar} alt={t.name} fill style={{ objectFit: 'cover' }} />
-          </div>
-          <div>
-            <p style={{ fontSize: '14px', fontWeight: 500, color: 'white', margin: 0 }}>{t.name}</p>
-            <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.6)', margin: 0 }}>{t.role}</p>
-          </div>
-        </div>
+        <AnimatePresence mode="wait">
+          <motion.p
+            key={current}
+            initial={{ opacity: 0, y: 12 * dir }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 * dir }}
+            transition={{ duration: 0.4, ease: 'easeOut' }}
+            style={{ fontSize: '14px', fontWeight: 300, lineHeight: 1.75, color: 'rgba(255,255,255,0.8)', flex: 1, margin: 0 }}
+          >
+            {t.quote.replace(/^"|"$/g, '')}
+          </motion.p>
+        </AnimatePresence>
 
-        {/* Arrows */}
-        <div style={{ display: 'flex', gap: '8px' }}>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={`person-${current}`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            style={{ display: 'flex', alignItems: 'center', gap: '12px' }}
+          >
+            <div style={{ position: 'relative', width: '36px', height: '36px', borderRadius: '50%', overflow: 'hidden', flexShrink: 0 }}>
+              <Image src={t.avatar} alt={t.name} fill style={{ objectFit: 'cover' }} />
+            </div>
+            <div>
+              <p style={{ fontSize: '13px', fontWeight: 500, color: 'white', margin: 0 }}>{t.name}</p>
+              <p style={{ fontSize: '11px', color: 'rgba(255,255,255,0.4)', margin: 0, letterSpacing: '0.04em' }}>{t.role}</p>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+
+        <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
           {[{ label: '←', action: prev }, { label: '→', action: next }].map(({ label, action }) => (
             <button key={label} onClick={action} style={{
-              width: '40px', height: '40px', borderRadius: '50%',
-              border: '1px solid rgba(255,255,255,0.3)',
+              width: '38px', height: '38px', borderRadius: '50%',
+              border: '1px solid rgba(255,255,255,0.15)',
               backgroundColor: 'transparent', color: 'white',
-              cursor: 'pointer', fontSize: '16px',
+              cursor: 'pointer', fontSize: '14px',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
+              transition: 'border-color 0.2s',
             }}>
               {label}
             </button>
           ))}
+          <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.3)', marginLeft: '8px', letterSpacing: '0.08em' }}>
+            {String(current + 1).padStart(2, '0')} / {String(testimonials.length).padStart(2, '0')}
+          </span>
         </div>
       </div>
 
       {/* Right photo */}
       <div className="testimonials-right" style={{ flex: 1, position: 'relative' }}>
-        <Image key={t.photo} src={t.photo} alt="Testimonial" fill style={{ objectFit: 'cover' }} />
+        <AnimatePresence>
+          <motion.div
+            key={t.photo}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.6 }}
+            style={{ position: 'absolute', inset: 0 }}
+          >
+            <Image src={t.photo} alt="Testimonial" fill style={{ objectFit: 'cover' }} />
+          </motion.div>
+        </AnimatePresence>
       </div>
     </section>
   )

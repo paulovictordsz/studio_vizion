@@ -72,7 +72,7 @@ export default function CTASection() {
 
               <div style={{ display: 'flex', gap: '24px', paddingLeft: '4px' }}>
                 <a
-                  href="https://wa.me/5511999999999"
+                  href="https://wa.me/5533999226933"
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{

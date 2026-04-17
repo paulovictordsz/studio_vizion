@@ -7,8 +7,8 @@
 }
 @media (max-width: 768px) {
   .navbar-root {
-    padding: 0 20px;
-    height: 60px;
+    padding: 0 24px;
+    height: 72px;
     /* liquid glass blur strip */
     background: rgba(10, 10, 10, 0.38) !important;
     backdrop-filter: blur(28px) saturate(160%) !important;

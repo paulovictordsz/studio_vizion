@@ -129,7 +129,7 @@ export default function Navbar() {
         className="navbar-mobile-cta"
         style={{
           display: 'none',
-          backgroundColor: '#D6FF91', color: 'black',
+          backgroundColor: 'white', color: 'black',
           borderRadius: '100px', padding: '0 16px', height: '38px',
           alignItems: 'center', gap: '7px',
           fontSize: '11px', fontWeight: 600, textDecoration: 'none',

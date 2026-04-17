@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { useModal } from '@/app/ModalContext'
+import { useState, useEffect, useRef } from 'react'
 
 function WhatsAppIcon() {
   return (
@@ -12,8 +13,36 @@ function WhatsAppIcon() {
   )
 }
 
+function isLightColor(r: number, g: number, b: number): boolean {
+  return (0.299 * r + 0.587 * g + 0.114 * b) / 255 > 0.55
+}
+
 export default function Navbar() {
   const { openModal } = useModal()
+  const navRef = useRef<HTMLDivElement>(null)
+  const [logoDark, setLogoDark] = useState(false)
+
+  useEffect(() => {
+    const check = () => {
+      const elements = document.elementsFromPoint(80, 44)
+      for (const el of elements) {
+        if (navRef.current?.contains(el)) continue
+        if (el === document.documentElement || el === document.body) continue
+        const bg = getComputedStyle(el).backgroundColor
+        if (!bg || bg === 'rgba(0, 0, 0, 0)' || bg === 'transparent') continue
+        const match = bg.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/)
+        if (match) {
+          setLogoDark(isLightColor(+match[1], +match[2], +match[3]))
+          return
+        }
+      }
+      setLogoDark(false)
+    }
+
+    check()
+    window.addEventListener('scroll', check, { passive: true })
+    return () => window.removeEventListener('scroll', check)
+  }, [])
 
   const handleCTA = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault()
@@ -23,6 +52,7 @@ export default function Navbar() {
 
   return (
     <motion.div
+      ref={navRef}
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
@@ -31,10 +61,21 @@ export default function Navbar() {
         display: 'flex', justifyContent: 'space-between', alignItems: 'center',
         padding: '16px 40px', pointerEvents: 'none',
       }}>
-      {/* Logo */}
+      {/* Logo — switches between white and black based on background */}
       <div style={{ pointerEvents: 'auto' }}>
         <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
-          <Image src="/images/logo-white.svg" alt="Studio Vizion" width={120} height={21} />
+          <motion.div
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
+          >
+            <Image
+              src={logoDark ? '/images/logo-black.svg' : '/images/logo-white.svg'}
+              alt="Studio Vizion"
+              width={120}
+              height={21}
+              style={{ transition: 'opacity 0.3s' }}
+            />
+          </motion.div>
         </Link>
       </div>
 
@@ -65,13 +106,17 @@ export default function Navbar() {
           </Link>
         ))}
         <a href="#" onClick={handleCTA} style={{
-          backgroundColor: 'white', color: 'black',
-          borderRadius: '100px', padding: '0 20px', height: '56px',
+          backgroundColor: '#D6FF91', color: 'black',
+          borderRadius: '100px', padding: '0 18px', height: '44px',
           display: 'flex', alignItems: 'center', gap: '8px',
-          fontSize: '13px', fontWeight: 500, textDecoration: 'none',
-          cursor: 'pointer',
+          fontSize: '12px', fontWeight: 600, textDecoration: 'none',
+          letterSpacing: '0.04em', cursor: 'pointer',
         }}>
-          Iniciar Projeto <span>↓</span>
+          Iniciar Projeto
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12 20h9"/>
+            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+          </svg>
         </a>
       </nav>
 

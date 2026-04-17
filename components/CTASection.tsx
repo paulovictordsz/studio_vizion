@@ -56,20 +56,18 @@ export default function CTASection() {
                 href="#"
                 onClick={handleCTA}
                 style={{
-                  backgroundColor: 'black', color: '#D6FF91',
-                  borderRadius: '100px', padding: '0 36px', height: '60px',
-                  display: 'flex', alignItems: 'center', gap: '14px',
-                  fontSize: '15px', fontWeight: 600, textDecoration: 'none',
-                  letterSpacing: '0.02em', whiteSpace: 'nowrap',
+                  backgroundColor: 'black', color: 'white',
+                  borderRadius: '100px', padding: '0 28px', height: '52px',
+                  display: 'flex', alignItems: 'center', gap: '10px',
+                  fontSize: '13px', fontWeight: 600, textDecoration: 'none',
+                  letterSpacing: '0.04em', whiteSpace: 'nowrap',
                 }}
               >
                 Iniciar um Projeto
-                <span style={{
-                  width: '34px', height: '34px', borderRadius: '50%',
-                  backgroundColor: '#D6FF91', color: 'black',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontSize: '16px', fontWeight: 700,
-                }}>→</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 20h9"/>
+                  <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+                </svg>
               </a>
 
               <div style={{ display: 'flex', gap: '24px', paddingLeft: '4px' }}>

@@ -233,3 +233,10 @@
   .cta-actions { width: 100% !important; }
   .cta-actions a:first-child { width: 100% !important; justify-content: center !important; }
 }
+
+/* ─── HERO BG IMAGE ──────────────────────────────────── */
+@media (max-width: 768px) {
+  .hero-bg-image {
+    object-position: 60% center !important;
+  }
+}

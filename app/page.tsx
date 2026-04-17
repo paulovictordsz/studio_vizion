@@ -2,7 +2,6 @@ import Navbar from '@/components/Navbar'
 import HeroSection from '@/components/HeroSection'
 import AboutSection from '@/components/AboutSection'
 import FeaturesGrid from '@/components/FeaturesGrid'
-import PhotoGallery from '@/components/PhotoGallery'
 import FAQSection from '@/components/FAQSection'
 import ProcessSection from '@/components/ProcessSection'
 import WorkshopsSection from '@/components/WorkshopsSection'
@@ -19,7 +18,6 @@ export default function Home() {
       <HeroSection />
       <AboutSection />
       <FeaturesGrid />
-      <PhotoGallery />
       <FAQSection />
       <ProcessSection />
       <WorkshopsSection />

@@ -106,14 +106,14 @@ export default function Navbar() {
           </Link>
         ))}
         <a href="#" onClick={handleCTA} style={{
-          backgroundColor: '#D6FF91', color: 'black',
-          borderRadius: '100px', padding: '0 18px', height: '44px',
-          display: 'flex', alignItems: 'center', gap: '8px',
-          fontSize: '12px', fontWeight: 600, textDecoration: 'none',
+          backgroundColor: 'white', color: 'black',
+          borderRadius: '100px', padding: '0 14px', height: '38px',
+          display: 'flex', alignItems: 'center', gap: '7px',
+          fontSize: '11px', fontWeight: 600, textDecoration: 'none',
           letterSpacing: '0.04em', cursor: 'pointer',
         }}>
           Iniciar Projeto
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <path d="M12 20h9"/>
             <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
           </svg>

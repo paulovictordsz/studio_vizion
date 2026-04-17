@@ -1,5 +1,4 @@
 'use client'
-import Image from 'next/image'
 import { AnimateIn } from './AnimateIn'
 
 export default function AboutSection() {
@@ -43,16 +42,41 @@ export default function AboutSection() {
           </div>
         </AnimateIn>
 
-        {/* Right */}
-        <AnimateIn direction="right" delay={0.15} className="about-right" style={{ flex: 1, borderRadius: '20px', overflow: 'hidden', backgroundColor: '#E8E8E8' }}>
-          <Image
-            src="/images/laptop-screens.png"
-            alt="Projetos do Studio Vizion"
-            width={800}
-            height={400}
-            unoptimized
-            style={{ width: '100%', height: 'auto', display: 'block' }}
-          />
+        {/* Right — placeholder until real project image is added */}
+        <AnimateIn direction="right" delay={0.15} className="about-right" style={{ flex: 1, borderRadius: '20px', overflow: 'hidden', backgroundColor: '#111' }}>
+          <svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: 'auto', display: 'block' }}>
+            {/* Grid */}
+            <defs>
+              <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.04)" strokeWidth="0.5"/>
+              </pattern>
+            </defs>
+            <rect width="800" height="400" fill="#111"/>
+            <rect width="800" height="400" fill="url(#grid)"/>
+
+            {/* Construction circles */}
+            <circle cx="400" cy="200" r="120" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="0.8"/>
+            <circle cx="400" cy="200" r="80" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="0.8"/>
+            <circle cx="400" cy="200" r="40" fill="none" stroke="rgba(214,255,145,0.12)" strokeWidth="0.8"/>
+
+            {/* Cross lines */}
+            <line x1="280" y1="200" x2="520" y2="200" stroke="rgba(255,255,255,0.06)" strokeWidth="0.8"/>
+            <line x1="400" y1="80" x2="400" y2="320" stroke="rgba(255,255,255,0.06)" strokeWidth="0.8"/>
+
+            {/* Corner marks */}
+            {[[100,60],[700,60],[100,340],[700,340]].map(([x,y], i) => (
+              <g key={i}>
+                <line x1={x-8} y1={y} x2={x+8} y2={y} stroke="rgba(255,255,255,0.12)" strokeWidth="0.8"/>
+                <line x1={x} y1={y-8} x2={x} y2={y+8} stroke="rgba(255,255,255,0.12)" strokeWidth="0.8"/>
+              </g>
+            ))}
+
+            {/* Center dot */}
+            <circle cx="400" cy="200" r="3" fill="rgba(214,255,145,0.4)"/>
+
+            {/* Label */}
+            <text x="400" y="358" textAnchor="middle" fontFamily="monospace" fontSize="9" fill="rgba(255,255,255,0.18)" letterSpacing="3">IMAGEM DO PROJETO EM BREVE</text>
+          </svg>
         </AnimateIn>
       </div>
     </section>

@@ -7,14 +7,17 @@
 }
 @media (max-width: 768px) {
   .navbar-root {
-    padding: 12px 16px;
+    padding: 0 20px;
+    height: 60px;
+    /* liquid glass blur strip */
+    background: rgba(10, 10, 10, 0.38) !important;
+    backdrop-filter: blur(28px) saturate(160%) !important;
+    -webkit-backdrop-filter: blur(28px) saturate(160%) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+    pointer-events: auto !important;
   }
-  .navbar-center {
-    gap: 0;
-    padding: 8px 16px;
-    height: 64px;
-  }
-  .navbar-link { display: none; }
+  .navbar-center { display: none !important; }
+  .navbar-mobile-cta { display: flex !important; }
   .navbar-lang { display: none !important; }
 }
 

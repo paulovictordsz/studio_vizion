@@ -13,6 +13,15 @@ function WhatsAppIcon() {
   )
 }
 
+function PencilIcon({ size = 11 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 20h9"/>
+      <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+    </svg>
+  )
+}
+
 function isLightColor(r: number, g: number, b: number): boolean {
   return (0.299 * r + 0.587 * g + 0.114 * b) / 255 > 0.55
 }
@@ -38,7 +47,6 @@ export default function Navbar() {
       }
       setLogoDark(false)
     }
-
     check()
     window.addEventListener('scroll', check, { passive: true })
     return () => window.removeEventListener('scroll', check)
@@ -56,30 +64,27 @@ export default function Navbar() {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-      className="navbar-root" style={{
+      className="navbar-root"
+      style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 10,
         display: 'flex', justifyContent: 'space-between', alignItems: 'center',
         padding: '16px 40px', pointerEvents: 'none',
-      }}>
-      {/* Logo — switches between white and black based on background */}
+      }}
+    >
+      {/* Logo */}
       <div style={{ pointerEvents: 'auto' }}>
         <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
-          <motion.div
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.3 }}
-          >
-            <Image
-              src={logoDark ? '/images/logo-black.svg' : '/images/logo-white.svg'}
-              alt="Studio Vizion"
-              width={120}
-              height={21}
-              style={{ transition: 'opacity 0.3s' }}
-            />
-          </motion.div>
+          <Image
+            src={logoDark ? '/images/logo-black.svg' : '/images/logo-white.svg'}
+            alt="Studio Vizion"
+            width={120}
+            height={21}
+            style={{ transition: 'opacity 0.3s' }}
+          />
         </Link>
       </div>
 
-      {/* Center pill nav */}
+      {/* Desktop pill nav */}
       <nav className="navbar-center" style={{
         backgroundColor: 'rgba(0,0,0,0.7)',
         backdropFilter: 'blur(12px)',
@@ -113,14 +118,30 @@ export default function Navbar() {
           letterSpacing: '0.04em', cursor: 'pointer',
         }}>
           Iniciar Projeto
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M12 20h9"/>
-            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
-          </svg>
+          <PencilIcon size={11} />
         </a>
       </nav>
 
-      {/* WhatsApp */}
+      {/* Mobile-only CTA button (standalone, no pill) */}
+      <a
+        href="#"
+        onClick={handleCTA}
+        className="navbar-mobile-cta"
+        style={{
+          display: 'none',
+          backgroundColor: '#D6FF91', color: 'black',
+          borderRadius: '100px', padding: '0 16px', height: '38px',
+          alignItems: 'center', gap: '7px',
+          fontSize: '11px', fontWeight: 600, textDecoration: 'none',
+          letterSpacing: '0.04em', cursor: 'pointer',
+          pointerEvents: 'auto', flexShrink: 0,
+        }}
+      >
+        Iniciar Projeto
+        <PencilIcon size={11} />
+      </a>
+
+      {/* WhatsApp — desktop only */}
       <a
         href="https://wa.me/5511999999999"
         target="_blank"

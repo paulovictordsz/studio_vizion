@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Bricolage_Grotesque, Archivo } from "next/font/google";
 import "./globals.css";
+import "./responsive.css";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -21,13 +22,12 @@ const archivo = Archivo({
 });
 
 export const metadata: Metadata = {
-  title: "Human Academy - A maior escola de IA para Profissionais Criativos",
-  description: "Aprenda como a inteligência artificial pode impulsionar a sua criatividade. Com os cursos mais completos do mercado.",
+  title: "Studio Vizion — Design de Identidade Visual, Sites e Sistemas Web",
+  description: "Studio de design especializado em branding, sites institucionais, landing pages e sistemas web. Do conceito à entrega, com critério e consistência.",
   openGraph: {
     type: "website",
-    title: "Human Academy - A maior escola de IA para Profissionais Criativos",
-    description: "Aprenda como a inteligência artificial pode impulsionar a sua criatividade.",
-    images: [{ url: "https://framerusercontent.com/assets/iKW6TscMiJKagBsJYM9Vi4WbxsM.webp" }],
+    title: "Studio Vizion — Design de Identidade Visual, Sites e Sistemas Web",
+    description: "Studio de design especializado em branding, sites institucionais, landing pages e sistemas web.",
   },
 };
 
@@ -41,7 +41,7 @@ export default function RootLayout({
       lang="pt-BR"
       className={`${inter.variable} ${bricolage.variable} ${archivo.variable} antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#F1F1F1]">{children}</body>
+      <body className="min-h-full flex flex-col bg-[#E8E8E8]">{children}</body>
     </html>
   );
 }

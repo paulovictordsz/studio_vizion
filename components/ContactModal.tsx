@@ -1,5 +1,5 @@
 'use client'
-import { useState, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useModal } from '@/app/ModalContext'
@@ -28,6 +28,14 @@ export default function ContactModal() {
   const [form, setForm] = useState({ name: '', email: '', phone: '', service: '', message: '' })
   const [sent, setSent] = useState(false)
   const [focused, setFocused] = useState<string | null>(null)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -96,7 +104,8 @@ export default function ContactModal() {
               {/* Header */}
               <div style={{
                 display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                padding: '28px 48px', borderBottom: '1px solid rgba(0,0,0,0.08)',
+                padding: isMobile ? '20px 24px' : '28px 48px',
+                borderBottom: '1px solid rgba(0,0,0,0.08)',
                 position: 'sticky', top: 0, backgroundColor: 'white', zIndex: 1,
               }}>
                 <Image src="/images/logo-black.svg" alt="Studio Vizion" width={120} height={21} />
@@ -117,8 +126,11 @@ export default function ContactModal() {
               {!sent ? (
                 <div style={{
                   maxWidth: '960px', margin: '0 auto',
-                  padding: '64px 48px 80px',
-                  display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'start',
+                  padding: isMobile ? '40px 24px 64px' : '64px 48px 80px',
+                  display: 'grid',
+                  gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
+                  gap: isMobile ? '40px' : '80px',
+                  alignItems: 'start',
                 }}>
                   {/* Left: copy */}
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', paddingTop: '8px' }}>
@@ -164,7 +176,7 @@ export default function ContactModal() {
                       />
                     </div>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: '24px' }}>
                       <div>
                         <label style={labelStyle}>E-mail *</label>
                         <input

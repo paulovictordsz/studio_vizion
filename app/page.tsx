@@ -3,10 +3,10 @@ import HeroSection from '@/components/HeroSection'
 import AboutSection from '@/components/AboutSection'
 import FeaturesGrid from '@/components/FeaturesGrid'
 import PhotoGallery from '@/components/PhotoGallery'
-import TestimonialsSlider from '@/components/TestimonialsSlider'
-import BrandsSection from '@/components/BrandsSection'
+import FAQSection from '@/components/FAQSection'
+import ProcessSection from '@/components/ProcessSection'
 import WorkshopsSection from '@/components/WorkshopsSection'
-import SocialTestimonials from '@/components/SocialTestimonials'
+import CTASection from '@/components/CTASection'
 import BenefitsSection from '@/components/BenefitsSection'
 import ContinueLearning from '@/components/ContinueLearning'
 import PreFooter from '@/components/PreFooter'
@@ -20,10 +20,10 @@ export default function Home() {
       <AboutSection />
       <FeaturesGrid />
       <PhotoGallery />
-      <TestimonialsSlider />
-      <BrandsSection />
+      <FAQSection />
+      <ProcessSection />
       <WorkshopsSection />
-      <SocialTestimonials />
+      <CTASection />
       <BenefitsSection />
       <ContinueLearning />
       <PreFooter />

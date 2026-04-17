@@ -84,11 +84,11 @@ export default function Navbar() {
         backgroundColor: 'rgba(0,0,0,0.7)',
         backdropFilter: 'blur(12px)',
         borderRadius: '100px',
-        height: '80px',
-        padding: '12px 24px',
+        height: '56px',
+        padding: '8px 8px 8px 20px',
         display: 'flex',
         alignItems: 'center',
-        gap: '8px',
+        gap: '4px',
         pointerEvents: 'auto',
       }}>
         {[

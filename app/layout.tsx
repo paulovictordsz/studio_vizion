@@ -22,13 +22,64 @@ const archivo = Archivo({
   weight: ["300", "400", "500", "600", "700"],
 });
 
+const siteUrl = "https://site.studiovizion.com";
+
 export const metadata: Metadata = {
-  title: "Studio Vizion — Design de Identidade Visual, Sites e Sistemas Web",
-  description: "Studio de design especializado em branding, sites institucionais, landing pages e sistemas web. Do conceito à entrega, com critério e consistência.",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "Studio Vizion — Identidade Visual, Sites e Sistemas Web",
+    template: "%s | Studio Vizion",
+  },
+  description:
+    "Studio de design especializado em branding, identidade visual, sites institucionais, landing pages e sistemas web. Do conceito à entrega com critério e consistência.",
+  keywords: [
+    "studio de design",
+    "branding",
+    "identidade visual",
+    "design de logo",
+    "site institucional",
+    "landing page",
+    "design system",
+    "interface digital",
+    "brand book",
+  ],
+  authors: [{ name: "Studio Vizion", url: siteUrl }],
+  creator: "Studio Vizion",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
+  },
   openGraph: {
     type: "website",
-    title: "Studio Vizion — Design de Identidade Visual, Sites e Sistemas Web",
-    description: "Studio de design especializado em branding, sites institucionais, landing pages e sistemas web.",
+    url: siteUrl,
+    siteName: "Studio Vizion",
+    locale: "pt_BR",
+    title: "Studio Vizion — Identidade Visual, Sites e Sistemas Web",
+    description:
+      "Branding, sites e sistemas web criados com propósito. Do conceito à entrega, com critério e consistência.",
+    images: [
+      {
+        url: "/images/bg_vizion.png",
+        width: 1376,
+        height: 768,
+        alt: "Studio Vizion — Design com propósito",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Studio Vizion — Identidade Visual, Sites e Sistemas Web",
+    description:
+      "Branding, sites e sistemas web criados com propósito. Do conceito à entrega, com critério e consistência.",
+    images: ["/images/bg_vizion.png"],
+  },
+  icons: {
+    icon: [
+      { url: "/favicon_vizion.svg", type: "image/svg+xml" },
+    ],
+    shortcut: "/favicon_vizion.svg",
+    apple: "/favicon_vizion.svg",
   },
 };
 

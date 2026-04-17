@@ -86,7 +86,7 @@ export default function ContactModal() {
             initial={{ clipPath: `circle(0px at ${ox}px ${oy}px)` }}
             animate={{ clipPath: `circle(200vmax at ${ox}px ${oy}px)` }}
             exit={{ clipPath: `circle(0px at ${ox}px ${oy}px)` }}
-            transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
             style={{
               position: 'fixed', inset: 0, zIndex: 100,
               backgroundColor: 'white',
@@ -98,7 +98,7 @@ export default function ContactModal() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.3, delay: 0.35 }}
+              transition={{ duration: 0.35, delay: 0.45 }}
               style={{ width: '100%', height: '100%', overflowY: 'auto' }}
             >
               {/* Header */}

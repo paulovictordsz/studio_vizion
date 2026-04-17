@@ -1,8 +1,8 @@
 'use client'
 import Image from 'next/image'
-import Link from 'next/link'
 import { AnimateIn, StaggerIn, staggerItem } from './AnimateIn'
 import { motion } from 'framer-motion'
+import { useModal } from '@/app/ModalContext'
 
 const projects = [
   { img: '/images/course-ai-image.jpg', tag: 'BRANDING', name: 'Marca & Identidade Visual', desc: 'Logotipo, paleta, tipografia e sistema visual completo para uma marca de moda sustentável.' },
@@ -11,6 +11,12 @@ const projects = [
 ]
 
 export default function ContinueLearning() {
+  const { openModal } = useModal()
+  const handleCTA = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault()
+    const rect = (e.currentTarget as HTMLElement).getBoundingClientRect()
+    openModal(rect.left + rect.width / 2, rect.top + rect.height / 2)
+  }
   return (
     <section className="continue-section" style={{ backgroundColor: 'black', padding: '80px', color: 'white' }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
@@ -55,7 +61,7 @@ export default function ContinueLearning() {
 
         <AnimateIn delay={0.2}>
           <div style={{ display: 'flex', justifyContent: 'center', marginTop: '56px' }}>
-            <Link href="#contato" style={{
+            <a href="#" onClick={handleCTA} style={{
               backgroundColor: '#D6FF91', color: 'black',
               borderRadius: '100px', padding: '0 36px', height: '56px',
               display: 'flex', alignItems: 'center', gap: '14px',
@@ -69,7 +75,7 @@ export default function ContinueLearning() {
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 fontSize: '16px',
               }}>→</span>
-            </Link>
+            </a>
           </div>
         </AnimateIn>
       </div>

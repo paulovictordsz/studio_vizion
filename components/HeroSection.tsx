@@ -2,9 +2,17 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
+import { useModal } from '@/app/ModalContext'
 
 export default function HeroSection() {
+  const { openModal } = useModal()
   const words = ['Transformamos', 'marcas em', 'experiências', 'visuais.']
+
+  const handleCTA = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault()
+    const rect = (e.currentTarget as HTMLElement).getBoundingClientRect()
+    openModal(rect.left + rect.width / 2, rect.top + rect.height / 2)
+  }
 
   return (
     <section style={{ position: 'relative', width: '100%', height: '100vh', overflow: 'hidden' }}>
@@ -109,12 +117,12 @@ export default function HeroSection() {
           className="hero-cta-row"
           style={{ display: 'flex', alignItems: 'center', gap: '24px' }}
         >
-          <Link href="#contato" style={{
+          <a href="#" onClick={handleCTA} style={{
             backgroundColor: '#D6FF91', color: 'black',
             borderRadius: '100px', padding: '0 28px', height: '56px',
             display: 'flex', alignItems: 'center', gap: '14px',
             fontSize: '14px', fontWeight: 600, textDecoration: 'none',
-            letterSpacing: '0.02em',
+            letterSpacing: '0.02em', cursor: 'pointer',
           }}>
             Iniciar Projeto
             <span style={{
@@ -123,7 +131,7 @@ export default function HeroSection() {
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               fontSize: '16px',
             }}>→</span>
-          </Link>
+          </a>
           <Link href="#servicos" style={{
             color: 'rgba(255,255,255,0.6)', fontSize: '12px',
             letterSpacing: '0.1em', textTransform: 'uppercase',

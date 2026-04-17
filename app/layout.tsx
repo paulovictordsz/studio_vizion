@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Bricolage_Grotesque, Archivo } from "next/font/google";
 import "./globals.css";
 import "./responsive.css";
+import ClientLayout from "./ClientLayout";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -41,7 +42,9 @@ export default function RootLayout({
       lang="pt-BR"
       className={`${inter.variable} ${bricolage.variable} ${archivo.variable} antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#E8E8E8]">{children}</body>
+      <body className="min-h-full flex flex-col bg-[#E8E8E8]">
+        <ClientLayout>{children}</ClientLayout>
+      </body>
     </html>
   );
 }
